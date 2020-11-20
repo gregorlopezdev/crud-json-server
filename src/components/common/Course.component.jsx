@@ -1,5 +1,5 @@
 const Course = () => {
-  return <></>
+  return <>work</>
 }
 
 export default Course
