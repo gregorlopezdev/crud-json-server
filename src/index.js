@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import CssBaseline from '@material-ui/core/CssBaseline'
+import UMenubar from './components/utils/UMenubar.component'
 import Home from './components/common/Home.component.jsx'
 import Course from './components/common/Course.component.jsx'
 import Notfound from './components/common/Notfound.component.jsx'
-import CssBaseline from '@material-ui/core/CssBaseline'
 
 ReactDOM.render(
   <Router>
     <CssBaseline />
+    <UMenubar />
     <Switch>
-      <Route path='/'>
+      <Route path='/' exact={true}>
         <Home />
       </Route>
       <Route path='/course/:id'>

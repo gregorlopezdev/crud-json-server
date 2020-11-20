@@ -1,9 +1,23 @@
-import { AppBar, Toolbar, IconButton, Typography, InputBase } from '@material-ui/core'
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase
+} from '@material-ui/core'
 import { createStyles, fade, makeStyles } from '@material-ui/core/styles'
 import { Search, Menu } from '@material-ui/icons'
 
+import { useHistory } from 'react-router-dom'
+
 const Menubar = () => {
   const classes = useStyles()
+  const history = useHistory()
+
+  const onNavigate = (to) => {
+    history.push(to)
+  }
 
   return (
     <div className={classes.root}>
@@ -19,6 +33,9 @@ const Menubar = () => {
           <Typography className={classes.title} variant='h6' noWrap>
             CRUD for EDteam
           </Typography>
+          <Button onClick={() => onNavigate('/')} color='inherit'>
+            Home
+          </Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <Search />
