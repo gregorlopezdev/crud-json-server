@@ -2,6 +2,8 @@
 
 # config
 .vscode
+.env.local
+.env.prod
 
 # dependencies
 /node_modules
