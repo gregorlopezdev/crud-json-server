@@ -4,15 +4,23 @@ const useApi = () => {
   const getAllCourses = () => {
     return Axios.get(`${process.env.REACT_APP_API}/courses`)
   }
-  const getOneCourse = (url) => {
-    return Axios.get(`${process.env.REACT_APP_API}/${url}`)
+  const getOneCourse = (id) => {
+    return Axios.get(`${process.env.REACT_APP_API}/courses/${id}`)
   }
-  const updateOneCourse = (url) => {}
-  const deleteOneCourse = (url) => {}
+  const createOneCourse = (course) => {
+    return Axios.post(`${process.env.REACT_APP_API}/courses`, course)
+  }
+  const updateOneCourse = (course) => {
+    return Axios.patch(`${process.env.REACT_APP_API}/courses/${course.id}`, course)
+  }
+  const deleteOneCourse = (course) => {
+    return Axios.delete(`${process.env.REACT_APP_API}/courses/${course.id}`)
+  }
 
   return {
     getAllCourses,
     getOneCourse,
+    createOneCourse,
     updateOneCourse,
     deleteOneCourse
   }
