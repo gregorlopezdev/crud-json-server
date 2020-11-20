@@ -4,6 +4,7 @@ import { Search, Menu } from '@material-ui/icons'
 
 const Menubar = () => {
   const classes = useStyles()
+
   return (
     <div className={classes.root}>
       <AppBar position='static'>
@@ -16,7 +17,7 @@ const Menubar = () => {
             <Menu />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
-            Material-UI
+            CRUD for EDteam
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
