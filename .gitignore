@@ -4,6 +4,7 @@
 .vscode
 .env.local
 .env.prod
+debug.log
 
 # dependencies
 /node_modules
