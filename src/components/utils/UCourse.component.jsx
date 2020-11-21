@@ -89,7 +89,11 @@ const useStyles = makeStyles((theme) =>
     Course_chips: {
       marginTop: theme.spacing(2),
       display: 'flex',
-      justifyContent: 'space-around'
+      justifyContent: 'center'
+    },
+    Course_chip: {
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5)
     }
   })
 )
