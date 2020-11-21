@@ -6,6 +6,7 @@
       "description": "Aprende los fundamentos de uno de los lenguajes más importantes de la actualidad y crea un administrador de contraseñas.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/85d3d7e4-19db-4cff-a4cb-cbead813b6b5.png",
       "price": 23,
+      "level": "basic",
       "available": false
     },
     {
@@ -13,7 +14,8 @@
       "name": "Arduino desde cero",
       "description": "Aprende a usar la plataforma de desarrollo de hardware libre más usada de los sistemas embebidos y automatiza tus proyectos electrónicos.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/1bada4e8-4bab-4be8-8f2e-83e285515187.png",
-      "price": "293",
+      "price": 293,
+      "level": "basic",
       "available": true
     },
     {
@@ -22,7 +24,8 @@
       "description": "Rick y Morty serán los protagonistas de tu propia app en Android Nativo que, además, podrás subir a Google Play.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/63d63045-f4e4-4f49-8f67-5859e9d3048e.png",
       "price": 51,
-      ",available": true
+      "level": "medium",
+      "available": true
     },
     {
       "id": 4,
@@ -30,6 +33,7 @@
       "description": "Aprende todos los roles y rutas que existen para ser un desarrollador web profesional en 2021.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/e7fbb7f9-773c-426a-bbb5-14276a37af33.png",
       "price": 0,
+      "level": "basic",
       "available": true
     },
     {
@@ -37,7 +41,8 @@
       "name": "Unity desde cero",
       "description": "Domina la mejor herramienta de desarrollo de videojuegos en tiempo real y crea tu primer videojuego multiplataforma.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/35d81cae-b9b2-4fbd-9329-8bd20e09ef9f.png",
-      "price": "16",
+      "price": 16,
+      "level": "advanced",
       "available": true
     }
   ]
