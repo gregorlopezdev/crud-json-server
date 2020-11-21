@@ -9,19 +9,31 @@ import {
   CardActions,
   Typography,
   Button,
-  Chip
+  Chip,
+  Dialog,
+  DialogTitle,
+  DialogActions
 } from '@material-ui/core'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
-import { Block, Check } from '@material-ui/icons'
+import {
+  Block,
+  Check,
+  BarChart,
+  AttachMoney,
+  Delete,
+  Edit
+} from '@material-ui/icons'
 
 import useApi from '../../hooks/useApi.hook'
+// import PropTypes from 'prop-types'
 
 const ISCourse = {
-  id: '',
-  name: '',
-  description: '',
+  id: 0,
+  name: 'nameless',
+  description: 'without description',
   poster: 'https://via.placeholder.com/500',
   price: 0,
+  level: 'no level',
   available: false
 }
 
@@ -31,6 +43,11 @@ const Course = () => {
   const apiHook = useApi()
   const history = useHistory()
   const [course, setCourse] = useState(ISCourse)
+  const [dialog, setDialog] = useState(false)
+
+  const onOpen = () => setDialog(true)
+
+  const onClose = () => setDialog(false)
 
   const onNavigate = (to) => {
     history.push(to)
@@ -39,70 +56,114 @@ const Course = () => {
   const onUpdateCourse = (id) => {
     onNavigate(`/add/${id}`)
   }
-  const onDeleteCourse = (id) => {
-    const confirm = window.confirm('Desea eliminar este curso ?')
-    if (confirm) {
-      apiHook.deleteOneCourse(id).then((res) => onNavigate(`/`))
-    }
+  const onDelete = (id) => {
+    apiHook.deleteOneCourse(id).then(() => onNavigate(`/`))
   }
 
   useEffect(() => {
     apiHook.getOneCourse(id).then((res) => {
       setCourse(res.data)
-      // console.log(res.data)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <div className={classes.course}>
-      <div className={classes.u_spacing}>
-        <Card className={classes.u_poster}>
+    <>
+      <div className={classes.Course}>
+        <Card className={classes.Course_poster}>
           <CardActionArea>
             <CardMedia
-              className={classes.u_media}
+              className={classes.Course_posterMedia}
               image={course.poster}
               title={course.name}
             />
           </CardActionArea>
         </Card>
+        <div className={classes.Course_content}>
+          {/* Este div es necesario para que Course_content tengan su altura por defecto y no la que le asigna el grid template rows */}
+          <Card>
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant='h5' component='h2'>
+                  {course.name}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant='body2'
+                  color='textSecondary'
+                  component='p'>
+                  {course.description}
+                </Typography>
+                <div className={classes.Course_chips}>
+                  <Chip
+                    className={classes.Course_chip}
+                    icon={course.available ? <Check /> : <Block />}
+                    label={course.available ? 'Available' : 'Unavailable'}
+                    color={course.available ? 'primary' : 'secondary'}
+                  />
+                  <Chip
+                    className={classes.Course_chip}
+                    icon={<BarChart />}
+                    label={course.level}
+                    color='primary'
+                  />
+                  <Chip
+                    className={classes.Course_chip}
+                    icon={<AttachMoney />}
+                    label={course.price === 0 ? 'Free' : course.price}
+                    color='secondary'
+                  />
+                </div>
+              </CardContent>
+            </CardActionArea>
+            <CardActions className={classes.Course_actions}>
+              <Button
+                className={classes.Course_actionsButton}
+                onClick={() => onUpdateCourse(course.id)}
+                variant='outlined'
+                color='primary'
+                startIcon={<Edit />}>
+                Edit
+              </Button>
+              <Button
+                className={classes.Course_actionsButton}
+                onClick={() => onOpen()}
+                variant='outlined'
+                color='secondary'
+                startIcon={<Delete />}>
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
+        </div>
       </div>
-      <div className={classes.u_spacing}>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant='h5' component='h2'>
-                {course.name}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant='body2'
-                color='textSecondary'
-                component='p'>
-                {course.description}
-              </Typography>
-              <Chip
-                className={classes.u_chip}
-                icon={course.available ? <Check /> : <Block />}
-                label={course.available ? 'Available' : 'Unavailable'}
-                color={course.available ? 'primary' : 'secondary'}
-              />
-            </CardContent>
-          </CardActionArea>
-          <CardActions className={classes.u_actions}>
-            <Button color='primary' disableRipple={true}>
-              Price: ${course.price}
-            </Button>
-            <Button onClick={() => onUpdateCourse(course.id)} color='primary'>
-              Edit
-            </Button>
-            <Button onClick={() => onDeleteCourse(course.id)} color='secondary'>
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
-    </div>
+      <Dialog open={dialog} onClose={onClose}>
+        <DialogTitle>
+          {'This course will be eliminated, do you agree?'}
+        </DialogTitle>
+        <DialogActions className={classes.Course_actions}>
+          <Button
+            className={classes.Course_actionsButton}
+            onClick={() => onClose()}
+            variant='outlined'
+            color='primary'
+            startIcon={<Block />}>
+            disagree
+          </Button>
+          <Button
+            className={classes.Course_actionsButton}
+            onClick={() => {
+              onClose()
+              onDelete(course.id)
+            }}
+            variant='contained'
+            color='secondary'
+            startIcon={<Check />}>
+            agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 
@@ -110,28 +171,33 @@ export default Course
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    course: {
+    Course: {
       display: 'grid',
       gridTemplateColumns: '60% 40%',
       gridGap: theme.spacing(3),
       justifyContent: 'center'
     },
-    u_spacing: {
-      paddingTop: theme.spacing(3),
-      paddingBottom: theme.spacing(3)
+    Course_poster: {
+      // maxWidth: '100%'
     },
-    u_actions: {
-      justifyContent: 'center'
-    },
-    u_poster: {
-      maxWidth: '100%'
-    },
-    u_media: {
+    Course_posterMedia: {
       height: 400
     },
-    u_chip: {
-      width: '100%',
-      marginTop: theme.spacing(2)
+    Course_content: {},
+    Course_chips: {
+      marginTop: theme.spacing(2),
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    Course_chip: {
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5)
+    },
+    Course_actions: {
+      justifyContent: 'center'
+    },
+    Course_actionsButton: {
+      width: '100%'
     }
   })
 )
