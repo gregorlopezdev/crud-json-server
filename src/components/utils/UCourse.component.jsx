@@ -43,16 +43,16 @@ const UCourse = ({ course, disabledRedirect }) => {
               color={course.available ? 'primary' : 'secondary'}
             />
             <Chip
-              className={classes.Course_chip}
+              className={`${classes.Course_chip} ${classes.u_bgYellow}`}
               icon={<BarChart />}
               label={course.level}
               color='primary'
             />
             <Chip
-              className={classes.Course_chip}
+              className={`${classes.Course_chip} ${classes.u_bgGreen}`}
               icon={<AttachMoney />}
               label={course.price === 0 ? 'Free' : course.price}
-              color='secondary'
+              color='primary'
             />
           </div>
         </CardContent>
@@ -94,6 +94,12 @@ const useStyles = makeStyles((theme) =>
     Course_chip: {
       marginLeft: theme.spacing(0.5),
       marginRight: theme.spacing(0.5)
+    },
+    u_bgGreen: {
+      backgroundColor: theme.palette.success.main
+    },
+    u_bgYellow: {
+      backgroundColor: theme.palette.warning.main
     }
   })
 )
