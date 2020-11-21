@@ -10,8 +10,9 @@ import { createStyles, fade, makeStyles } from '@material-ui/core/styles'
 import { Search, Menu } from '@material-ui/icons'
 
 import { useHistory } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
-const Menubar = () => {
+const UMenubar = () => {
   const classes = useStyles()
   const history = useHistory()
 
@@ -20,17 +21,21 @@ const Menubar = () => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.Menubar}>
       <AppBar position='static'>
-        <Toolbar>
+        <Toolbar className={classes.Menubar_toolbar}>
           <IconButton
+            onClick={() => onNavigate('/')}
             edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='open drawer'>
+            className={classes.Menubar_menuButton}
+            color='inherit'>
             <Menu />
           </IconButton>
-          <Typography className={classes.title} variant='h6' noWrap>
+          <Typography
+            className={classes.Menubar_title}
+            variant='h6'
+            component='h2'
+            noWrap>
             CRUD for EDteam
           </Typography>
           <Button onClick={() => onNavigate('/')} color='inherit'>
@@ -39,8 +44,8 @@ const Menubar = () => {
           <Button onClick={() => onNavigate('/add')} color='inherit'>
             Add course
           </Button>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <div className={classes.Menubar_search}>
+            <div className={classes.Menubar_searchIcon}>
               <Search />
             </div>
             <InputBase
@@ -49,7 +54,6 @@ const Menubar = () => {
                 root: classes.inputRoot,
                 input: classes.inputInput
               }}
-              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
         </Toolbar>
@@ -58,38 +62,37 @@ const Menubar = () => {
   )
 }
 
-export default Menubar
+// UMenubar.propTypes = {}
+
+export default UMenubar
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
+    Menubar: {
       flexGrow: 1
     },
-    menuButton: {
+    Menubar_toolbar: {
+      maxWidth: `${theme.breakpoints.values.lg}px`,
+      width: `${theme.breakpoints.values.lg}px`,
+      margin: '0 auto'
+    },
+    Menubar_menuButton: {
       marginRight: theme.spacing(2)
     },
-    title: {
-      flexGrow: 1,
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block'
-      }
+    Menubar_title: {
+      flexGrow: 1
     },
-    search: {
+    Menubar_search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25)
       },
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto'
-      }
+      marginLeft: theme.spacing(1),
+      width: 'auto'
     },
-    searchIcon: {
+    Menubar_searchIcon: {
       padding: theme.spacing(0, 2),
       height: '100%',
       position: 'absolute',
@@ -106,12 +109,9 @@ const useStyles = makeStyles((theme) =>
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch'
-        }
+      width: '12ch',
+      '&:focus': {
+        width: '20ch'
       }
     }
   })
