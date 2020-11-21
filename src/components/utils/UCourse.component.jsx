@@ -30,7 +30,7 @@ const UCourse = ({ course, disabledRedirect }) => {
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            {course.name || 'Untitle'}
+            {course.name || 'untitle'}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
             {course.description || 'without description'}
