@@ -36,6 +36,9 @@ const Menubar = () => {
           <Button onClick={() => onNavigate('/')} color='inherit'>
             Home
           </Button>
+          <Button onClick={() => onNavigate('/add')} color='inherit'>
+            Add course
+          </Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <Search />
