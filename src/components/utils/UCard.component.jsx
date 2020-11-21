@@ -26,7 +26,7 @@ const UCard = ({ course, disabled }) => {
       <CardActionArea onClick={() => disabled || onNavigate(course.id)}>
         <CardMedia
           className={classes.media}
-          image={course.url_poster_medium || 'https://via.placeholder.com/500'}
+          image={course.poster || 'https://via.placeholder.com/500'}
           title={course.name}
         />
         <CardContent>

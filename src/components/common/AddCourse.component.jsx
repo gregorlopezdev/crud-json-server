@@ -25,8 +25,7 @@ const defaultValues = {
   id: '',
   name: '',
   description: '',
-  url_poster_medium: '',
-  url_poster_big: '',
+  poster: '',
   price: '',
   available: false
 }
@@ -41,14 +40,9 @@ const formSchema = yup.object().shape({
     .required('La descripcion es requerida!')
     .min(50, 'El minimo de caracteres aceptados son 50!')
     .max(500, 'El maximo de caracteres aceptados son 500!'),
-  url_poster_medium: yup
+  poster: yup
     .string()
-    .required('La url del poster mediano es requerida!')
-    .min(10, 'El minimo de caracteres aceptados son 10!')
-    .max(500, 'El maximo de caracteres aceptados son 500!'),
-  url_poster_big: yup
-    .string()
-    .required('La url del poster grande es requerida!')
+    .required('La url del poster es requerida!')
     .min(10, 'El minimo de caracteres aceptados son 10!')
     .max(500, 'El maximo de caracteres aceptados son 500!'),
   price: yup
@@ -188,40 +182,17 @@ const AddCourse = () => {
           />
           <TextField
             className={classes.field}
-            name='url_poster_medium'
+            name='poster'
             type='text'
-            label='Ingresa la url del poster en tamaño mediano'
+            label='Ingresa la url del poster'
             variant='outlined'
-            value={formik.values.url_poster_medium}
+            value={formik.values.poster}
             helperText={
-              formik.errors.url_poster_medium &&
-              formik.touched.url_poster_medium &&
-              formik.errors.url_poster_medium
+              formik.errors.poster &&
+              formik.touched.poster &&
+              formik.errors.poster
             }
-            error={
-              formik.errors.url_poster_medium &&
-              formik.touched.url_poster_medium
-            }
-            onChange={(e) => {
-              formik.handleChange(e)
-              onChange(e)
-            }}
-          />
-          <TextField
-            className={classes.field}
-            name='url_poster_big'
-            type='text'
-            label='Ingresa la url del poster en tamaño grande'
-            variant='outlined'
-            value={formik.values.url_poster_big}
-            helperText={
-              formik.errors.url_poster_big &&
-              formik.touched.url_poster_big &&
-              formik.errors.url_poster_big
-            }
-            error={
-              formik.errors.url_poster_big && formik.touched.url_poster_big
-            }
+            error={formik.errors.poster && formik.touched.poster}
             onChange={(e) => {
               formik.handleChange(e)
               onChange(e)

@@ -20,8 +20,7 @@ const ISCourse = {
   id: '',
   name: '',
   description: '',
-  url_poster_medium: 'https://via.placeholder.com/300',
-  url_poster_big: 'https://via.placeholder.com/500',
+  poster: 'https://via.placeholder.com/500',
   price: 0,
   available: false
 }
@@ -62,7 +61,7 @@ const Course = () => {
           <CardActionArea>
             <CardMedia
               className={classes.u_media}
-              image={course.url_poster_big}
+              image={course.poster}
               title={course.name}
             />
           </CardActionArea>
