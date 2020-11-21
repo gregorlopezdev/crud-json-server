@@ -1,35 +1,48 @@
 import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
-import useApi from '../../hooks/useApi.hook'
-
-import { createStyles, makeStyles } from '@material-ui/core/styles'
-
 import {
   Button,
   TextField,
+  InputLabel,
   FormControl,
   FormHelperText,
   Select,
   MenuItem,
   Typography,
-  InputAdornment
+  InputAdornment,
+  Dialog,
+  DialogTitle,
+  DialogActions
 } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
+import {
+  Block,
+  Check,
+  DeleteRounded,
+  CreateRounded,
+  BorderColor,
+  RotateLeftRounded
+} from '@material-ui/icons'
 import { useFormik } from 'formik'
+
+import useApi from '../../hooks/useApi.hook'
 
 import UCourse from '../utils/UCourse.component'
 
 import * as yup from 'yup'
 
-const defaultValues = {
-  id: '',
+const ISValues = {
+  id: 0,
   name: '',
   description: '',
   poster: '',
-  price: '',
+  price: 0,
+  level: 'basic',
   available: false
 }
-const formSchema = yup.object().shape({
+
+const formErrorSchema = yup.object().shape({
   name: yup
     .string()
     .required('El nombre es requerido!')
@@ -46,10 +59,11 @@ const formSchema = yup.object().shape({
     .min(10, 'El minimo de caracteres aceptados son 10!')
     .max(500, 'El maximo de caracteres aceptados son 500!'),
   price: yup
-    .string()
+    .number()
     .required('El precio es requerido!')
-    .min(1, 'El minimo de caracteres aceptados es 1!')
-    .max(50, 'El maximo de caracteres aceptados son 50!'),
+    .min(0, 'El precio minimo aceptado es es 0!')
+    .max(5000, 'El precio maximo aceptado es es 5000!'),
+  level: yup.string().required('El nivel es requerido!'),
   available: yup
     .boolean()
     .required('Es necesario saber ni el curso esta disponible actualmente!')
@@ -61,14 +75,17 @@ const AddCourse = () => {
   const history = useHistory()
   const apiHook = useApi()
   const [mode, setMode] = useState('create')
-  // const [course, setCourse] = useState(defaultValues)
-  const [values, setValues] = useState(defaultValues)
-
+  const [values, setValues] = useState(ISValues)
+  const [dialog, setDialog] = useState(false)
   const formik = useFormik({
     initialValues: values,
-    validationSchema: formSchema,
+    validationSchema: formErrorSchema,
     onSubmit: () => onSubmit()
   })
+
+  const onOpen = () => setDialog(true)
+
+  const onClose = () => setDialog(false)
 
   const onNavigate = (to) => {
     history.push(to)
@@ -77,28 +94,41 @@ const AddCourse = () => {
   const getId = () => Math.round(Math.random() * (10000 - 1) + 1)
 
   const onChange = (event) => {
-    setValues((prevValues) => ({
-      ...prevValues,
-      [event.target.name]: event.target.value
-    }))
+    if (event.target.name === 'price') {
+      if (event.target.value.length !== 0) {
+        setValues((prevValues) => ({
+          ...prevValues,
+          [event.target.name]: parseFloat(event.target.value)
+        }))
+      } else {
+        setValues((prevValues) => ({
+          ...prevValues,
+          [event.target.name]: 0
+        }))
+      }
+    } else {
+      setValues((prevValues) => ({
+        ...prevValues,
+        [event.target.name]: event.target.value
+      }))
+    }
   }
 
   const onDelete = (id) => {
-    const confirm = window.confirm('Desea eliminar este curso ?')
-    if (confirm) {
-      apiHook.deleteOneCourse(id).then((res) => onNavigate(`/`))
-    }
+    apiHook.deleteOneCourse(id).then(() => onNavigate(`/`))
   }
 
   const onSubmit = () => {
     if (mode === 'create') {
       const id = getId()
       const course = { ...values, id }
+      // console.log(course)
       apiHook.createOneCourse(course).then((res) => {
         onNavigate(`/courses/${res.data.id}`)
       })
     } else if (mode === 'update') {
       const course = values
+      // console.log(course)
       apiHook.updateOneCourse(course).then((res) => {
         onNavigate(`/courses/${res.data.id}`)
       })
@@ -115,27 +145,23 @@ const AddCourse = () => {
     } else {
       setMode('create')
       formik.handleReset()
-      // formik.setValues(defaultValues)
-      setValues(defaultValues)
+      setValues(ISValues)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   return (
-    <article className={classes.grid}>
-      <div>
-        <form className={classes.form} onSubmit={formik.handleSubmit}>
-          <Typography
-            className={classes.u_margin_bottom}
-            variant='h5'
-            component='h2'>
+    <>
+      <article className={classes.AddCourse}>
+        <form className={classes.AddCourse_form} onSubmit={formik.handleSubmit}>
+          <Typography className={classes.u_mb1} variant='h5' component='h2'>
             {mode === 'create'
               ? 'Ingresa los datos del nuevo curso'
               : `Actualiza los datos del curso: ${values.name}`}
           </Typography>
           {mode === 'create' && (
             <Typography
-              className={classes.u_margin_bottom}
+              className={classes.u_mb3}
               color='textSecondary'
               variant='body1'
               component='p'>
@@ -145,7 +171,7 @@ const AddCourse = () => {
           )}
 
           <TextField
-            className={classes.field}
+            className={classes.AddCourse_field}
             name='name'
             type='text'
             label='Ingresa un nombre'
@@ -161,7 +187,7 @@ const AddCourse = () => {
             }}
           />
           <TextField
-            className={classes.field}
+            className={classes.AddCourse_field}
             name='description'
             type='text'
             multiline={true}
@@ -181,7 +207,7 @@ const AddCourse = () => {
             }}
           />
           <TextField
-            className={classes.field}
+            className={classes.AddCourse_field}
             name='poster'
             type='text'
             label='Ingresa la url del poster'
@@ -199,9 +225,9 @@ const AddCourse = () => {
             }}
           />
           <TextField
-            className={classes.field}
+            className={classes.AddCourse_field}
             name='price'
-            type='text'
+            type='number'
             label='Ingresa un precio para el curso'
             variant='outlined'
             value={formik.values.price}
@@ -219,12 +245,34 @@ const AddCourse = () => {
               )
             }}
           />
-          <FormControl className={classes.field}>
+          <FormControl variant='outlined' className={classes.AddCourse_field}>
+            <InputLabel id='level-label'>Ingresa un nivel</InputLabel>
             <Select
-              labelId='select'
+              labelId='level-label'
+              id='level'
+              name='level'
+              value={formik.values.level}
+              onChange={(e) => {
+                formik.handleChange(e)
+                onChange(e)
+              }}>
+              <MenuItem value='basic'>Basic</MenuItem>
+              <MenuItem value='medium'>Medium</MenuItem>
+              <MenuItem value='advanced'>Advanced</MenuItem>
+            </Select>
+            <FormHelperText>
+              {formik.errors.available &&
+                formik.touched.available &&
+                formik.errors.available}
+            </FormHelperText>
+          </FormControl>
+
+          <FormControl variant='outlined' className={classes.AddCourse_field}>
+            <InputLabel id='select-label'>Ingresa un estado</InputLabel>
+            <Select
+              labelId='select-label'
               id='select'
               name='available'
-              variant='outlined'
               value={formik.values.available}
               onChange={(e) => {
                 formik.handleChange(e)
@@ -240,71 +288,107 @@ const AddCourse = () => {
             </FormHelperText>
           </FormControl>
 
-          <div className={classes.buttons}>
+          <div className={classes.AddCourse_actions}>
             <Button
               type='submit'
-              className={classes.button}
-              variant='contained'
-              color='primary'>
+              className={classes.AddCourse_actionsButton}
+              variant='outlined'
+              color='primary'
+              startIcon={
+                mode === 'create' ? <CreateRounded /> : <BorderColor />
+              }>
               {mode}
             </Button>
             {mode === 'create' && (
               <Button
-                className={classes.button}
-                variant='contained'
+                className={classes.AddCourse_actionsButton}
+                variant='outlined'
                 color='secondary'
+                startIcon={<RotateLeftRounded />}
                 onClick={() => {
                   formik.handleReset()
-                  setValues(defaultValues)
+                  setValues(ISValues)
                 }}>
-                Reset data
+                Reset
               </Button>
             )}
             {mode === 'update' && (
               <Button
-                className={classes.button}
-                variant='contained'
+                className={classes.AddCourse_actionsButton}
+                onClick={() => onOpen()}
+                variant='outlined'
                 color='secondary'
-                onClick={() => onDelete(values.id)}>
+                startIcon={<DeleteRounded />}>
                 Delete
               </Button>
             )}
           </div>
         </form>
-      </div>
-      <div>
-        <UCourse course={values} disabledRedirect={true} />
-      </div>
-    </article>
+        <div>
+          {/* Este div es necesario para que Course_content tengan su altura por defecto y no la que le asigna el grid template rows */}
+          <UCourse course={values} disabledRedirect={true} />
+        </div>
+      </article>
+
+      <Dialog open={dialog} onClose={onClose}>
+        <DialogTitle>
+          {'This course will be eliminated, do you agree?'}
+        </DialogTitle>
+        <DialogActions className={classes.AddCourse_actions}>
+          <Button
+            className={classes.AddCourse_actionsButton}
+            onClick={() => onClose()}
+            variant='outlined'
+            color='primary'
+            startIcon={<Block />}>
+            disagree
+          </Button>
+          <Button
+            className={classes.AddCourse_actionsButton}
+            onClick={() => {
+              onClose()
+              onDelete(values.id)
+            }}
+            variant='contained'
+            color='secondary'
+            startIcon={<Check />}>
+            agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 export default AddCourse
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    grid: {
+    AddCourse: {
       display: 'grid',
-      gridTemplateColumns: '35% 35%',
+      gridTemplateColumns: '50% 35%',
       gridGap: theme.spacing(3),
       justifyContent: 'center'
-      // padding: `0 ${theme.spacing(3)}`
     },
-    form: {
+    AddCourse_form: {
       width: '100%'
     },
-    field: {
+    AddCourse_field: {
       width: '100%',
       marginBottom: theme.spacing(2)
     },
-    buttons: {
-      textAlign: 'center'
+    AddCourse_actions: {
+      display: 'flex',
+      justifyContent: 'center'
     },
-    button: {
-      width: '40%',
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1)
+    AddCourse_actionsButton: {
+      width: '100%',
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5)
     },
-    u_margin_bottom: {
+    u_mb1: {
+      marginBottom: theme.spacing(1)
+    },
+    u_mb3: {
       marginBottom: theme.spacing(3)
     }
   })
