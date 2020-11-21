@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Python desde cero",
       "description": "Aprende los fundamentos de uno de los lenguajes más importantes de la actualidad y crea un administrador de contraseñas.",
-      "url_poster": "https://edteam-media.s3.amazonaws.com/courses/medium/85d3d7e4-19db-4cff-a4cb-cbead813b6b5.png",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/85d3d7e4-19db-4cff-a4cb-cbead813b6b5.png",
       "price": 23,
       "available": false
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "name": "Arduino desde cero",
       "description": "Aprende a usar la plataforma de desarrollo de hardware libre más usada de los sistemas embebidos y automatiza tus proyectos electrónicos.",
-      "url_poster": "https://edteam-media.s3.amazonaws.com/courses/medium/1bada4e8-4bab-4be8-8f2e-83e285515187.png",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/1bada4e8-4bab-4be8-8f2e-83e285515187.png",
       "price": 29,
       "available": false
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "name": "Crea y sube tu primera app a Google Play",
       "description": "Rick y Morty serán los protagonistas de tu propia app en Android Nativo que, además, podrás subir a Google Play.",
-      "url_poster": "https://edteam-media.s3.amazonaws.com/courses/medium/63d63045-f4e4-4f49-8f67-5859e9d3048e.png",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/63d63045-f4e4-4f49-8f67-5859e9d3048e.png",
       "price": 51,
       ",available": true
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "name": "La ruta del desarrollador web",
       "description": "Aprende todos los roles y rutas que existen para ser un desarrollador web profesional en 2021.",
-      "url_poster": "https://edteam-media.s3.amazonaws.com/courses/medium/e7fbb7f9-773c-426a-bbb5-14276a37af33.png",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/e7fbb7f9-773c-426a-bbb5-14276a37af33.png",
       "price": 0,
       "available": true
     }
