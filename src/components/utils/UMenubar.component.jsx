@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) =>
       flexGrow: 1
     },
     Menubar_toolbar: {
-      maxWidth: `${theme.breakpoints.values.lg}px`,
+      // maxWidth: `${theme.breakpoints.values.lg}px`,
       width: `${theme.breakpoints.values.lg}px`,
       margin: '0 auto'
     },
