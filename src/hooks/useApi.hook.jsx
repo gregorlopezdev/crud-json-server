@@ -11,10 +11,13 @@ const useApi = () => {
     return Axios.post(`${process.env.REACT_APP_API}/courses`, course)
   }
   const updateOneCourse = (course) => {
-    return Axios.patch(`${process.env.REACT_APP_API}/courses/${course.id}`, course)
+    return Axios.patch(
+      `${process.env.REACT_APP_API}/courses/${course.id}`,
+      course
+    )
   }
-  const deleteOneCourse = (course) => {
-    return Axios.delete(`${process.env.REACT_APP_API}/courses/${course.id}`)
+  const deleteOneCourse = (id) => {
+    return Axios.delete(`${process.env.REACT_APP_API}/courses/${id}`)
   }
 
   return {
