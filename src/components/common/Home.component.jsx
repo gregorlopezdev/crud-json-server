@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import useApi from '../../hooks/useApi.hook'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
 
-import UCard from '../utils/UCard.component'
+import UCourse from '../utils/UCourse.component'
 
 const Home = () => {
   const classes = useStyles()
@@ -18,10 +18,10 @@ const Home = () => {
   }, [])
 
   return (
-    <article className={classes.grid}>
+    <article className={classes.Home}>
       {courses.map((course, key) => (
         <div key={key}>
-          <UCard course={course} disabled={false} />
+          <UCourse course={course} disabledRedirect={false} />
         </div>
       ))}
     </article>
@@ -32,7 +32,7 @@ export default Home
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    grid: {
+    Home: {
       // margin: `${theme.spacing(3)}px auto`,
       display: 'grid',
       gridTemplateColumns: '30% 30% 30%',

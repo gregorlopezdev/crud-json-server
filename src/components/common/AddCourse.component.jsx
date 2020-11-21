@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 
-import UCard from '../utils/UCard.component'
+import UCourse from '../utils/UCourse.component'
 
 import * as yup from 'yup'
 
@@ -273,7 +273,7 @@ const AddCourse = () => {
         </form>
       </div>
       <div>
-        <UCard course={values} disabled={true} />
+        <UCourse course={values} disabledRedirect={true} />
       </div>
     </article>
   )
