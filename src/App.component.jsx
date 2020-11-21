@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { CssBaseline } from '@material-ui/core'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
 
-import CssBaseline from '@material-ui/core/CssBaseline'
 import UMenubar from './components/utils/UMenubar.component'
+
 import Home from './components/common/Home.component.jsx'
 import Course from './components/common/Course.component.jsx'
 import AddCourse from './components/common/AddCourse.component.jsx'
@@ -15,7 +16,7 @@ const App = () => {
     <Router>
       <CssBaseline />
       <UMenubar />
-      <div className={classes.app}>
+      <div className={classes.App}>
         <Switch>
           <Route path='/' exact={true}>
             <Home />
@@ -42,7 +43,7 @@ export default App
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    app: {
+    App: {
       maxWidth: `${theme.breakpoints.values.lg}px`,
       margin: `${theme.spacing(2)}px auto`,
       paddingLeft: theme.spacing(2),
