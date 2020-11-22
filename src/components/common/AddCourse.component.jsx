@@ -98,7 +98,7 @@ const AddCourse = () => {
       if (event.target.value.length !== 0) {
         setValues((prevValues) => ({
           ...prevValues,
-          [event.target.name]: parseFloat(event.target.value)
+          [event.target.name]: parseInt(event.target.value)
         }))
       } else {
         setValues((prevValues) => ({
@@ -175,7 +175,7 @@ const AddCourse = () => {
             name='name'
             type='text'
             label='Ingresa un nombre'
-            variant='outlined'
+            variant='filled'
             value={formik.values.name}
             helperText={
               formik.errors.name && formik.touched.name && formik.errors.name
@@ -193,7 +193,7 @@ const AddCourse = () => {
             multiline={true}
             rows={5}
             label='Ingresa una descripcion'
-            variant='outlined'
+            variant='filled'
             value={formik.values.description}
             helperText={
               formik.errors.description &&
@@ -211,7 +211,7 @@ const AddCourse = () => {
             name='poster'
             type='text'
             label='Ingresa la url del poster'
-            variant='outlined'
+            variant='filled'
             value={formik.values.poster}
             helperText={
               formik.errors.poster &&
@@ -229,7 +229,7 @@ const AddCourse = () => {
             name='price'
             type='number'
             label='Ingresa un precio para el curso'
-            variant='outlined'
+            variant='filled'
             value={formik.values.price}
             helperText={
               formik.errors.price && formik.touched.price && formik.errors.price
@@ -245,7 +245,7 @@ const AddCourse = () => {
               )
             }}
           />
-          <FormControl variant='outlined' className={classes.AddCourse_field}>
+          <FormControl variant='filled' className={classes.AddCourse_field}>
             <InputLabel id='level-label'>Ingresa un nivel</InputLabel>
             <Select
               labelId='level-label'
@@ -267,7 +267,7 @@ const AddCourse = () => {
             </FormHelperText>
           </FormControl>
 
-          <FormControl variant='outlined' className={classes.AddCourse_field}>
+          <FormControl variant='filled' className={classes.AddCourse_field}>
             <InputLabel id='select-label'>Ingresa un estado</InputLabel>
             <Select
               labelId='select-label'
