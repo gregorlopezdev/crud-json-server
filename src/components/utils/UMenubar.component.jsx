@@ -21,7 +21,7 @@ const UMenubar = () => {
   }
 
   return (
-    <div className={classes.Menubar}>
+    <nav className={classes.Menubar}>
       <AppBar position='static'>
         <Toolbar className={classes.Menubar_toolbar}>
           <IconButton
@@ -58,7 +58,7 @@ const UMenubar = () => {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+    </nav>
   )
 }
 
@@ -72,12 +72,12 @@ const useStyles = makeStyles((theme) =>
       flexGrow: 1
     },
     Menubar_toolbar: {
-      // maxWidth: `${theme.breakpoints.values.lg}px`,
-      width: `${theme.breakpoints.values.lg}px`,
+      // maxWidth: theme.breakpoints.values.lg,
+      minWidth: theme.breakpoints.values.md,
       margin: '0 auto'
     },
     Menubar_menuButton: {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(1)
     },
     Menubar_title: {
       flexGrow: 1
