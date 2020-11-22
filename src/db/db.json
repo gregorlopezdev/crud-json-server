@@ -1,34 +1,34 @@
 {
   "courses": [
     {
-      "id": 1,
+      "id": 5399,
       "name": "Python desde cero",
       "description": "Aprende los fundamentos de uno de los lenguajes más importantes de la actualidad y crea un administrador de contraseñas.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/85d3d7e4-19db-4cff-a4cb-cbead813b6b5.png",
       "price": 23,
       "level": "basic",
-      "available": false
+      "available": true
     },
     {
-      "id": 2,
+      "id": 6893,
       "name": "Arduino desde cero",
       "description": "Aprende a usar la plataforma de desarrollo de hardware libre más usada de los sistemas embebidos y automatiza tus proyectos electrónicos.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/1bada4e8-4bab-4be8-8f2e-83e285515187.png",
-      "price": 293,
+      "price": 2914,
       "level": "basic",
-      "available": true
+      "available": false
     },
     {
-      "id": 3,
+      "id": 2377,
       "name": "Crea y sube tu primera app a Google Play",
       "description": "Rick y Morty serán los protagonistas de tu propia app en Android Nativo que, además, podrás subir a Google Play.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/63d63045-f4e4-4f49-8f67-5859e9d3048e.png",
-      "price": 51,
-      "level": "medium",
+      "price": 493,
+      "level": "advanced",
       "available": true
     },
     {
-      "id": 4,
+      "id": 9821,
       "name": "La ruta del desarrollador web",
       "description": "Aprende todos los roles y rutas que existen para ser un desarrollador web profesional en 2021.",
       "poster": "https://edteam-media.s3.amazonaws.com/courses/big/e7fbb7f9-773c-426a-bbb5-14276a37af33.png",
@@ -37,12 +37,57 @@
       "available": true
     },
     {
-      "id": 5609,
-      "name": "Unity desde cero",
-      "description": "Domina la mejor herramienta de desarrollo de videojuegos en tiempo real y crea tu primer videojuego multiplataforma.",
-      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/35d81cae-b9b2-4fbd-9329-8bd20e09ef9f.png",
-      "price": 16,
-      "level": "advanced",
+      "id": 4758,
+      "name": "Crea tu propio Slack con SignalR",
+      "description": "En este taller construirás una sala de chat con React.js y .NET Core desde 0, conectando backend con frontend y luego haciendo que se actualice en tiempo real usando SignalR.",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/5afd9bc4-46f7-4326-9e9f-fe1a024be305.png",
+      "price": 28,
+      "level": "basic",
+      "available": true
+    },
+    {
+      "id": 8293,
+      "name": "Productividad y trabajo en equipo con Asana",
+      "description": "Organiza y supervisa el trabajo y objetivos de equipos de todo tamaño desde cualquier lugar del mundo",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/f02fc743-189f-4f00-a1af-1716961d5a36.png",
+      "price": 42,
+      "level": "basic",
+      "available": true
+    },
+    {
+      "id": 9470,
+      "name": "Programación para niños con Scratch",
+      "description": "Ingresa al maravilloso mundo de la programación y desarrolla habilidades para el futuro.",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/a1a1984b-d7c7-4fdd-b176-6647819d3d2e.png",
+      "price": 30,
+      "level": "basic",
+      "available": true
+    },
+    {
+      "id": 2459,
+      "name": "Svelte desde cero",
+      "description": "Desarrolla tus apps con la librería más reciente que utiliza un enfoque distinto al momento de crear interfaces de usuario.",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/6af6a692-a841-453a-80ed-e9ecbbcf7f7f.png",
+      "price": 18,
+      "level": "basic",
+      "available": true
+    },
+    {
+      "id": 5515,
+      "name": "Linux desde cero",
+      "description": "Aprende a utilizar Linux y sus herramientas entendiendo los conceptos que hay detrás del sistema operativo.",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/5ffc4c77-cbc3-476d-9c18-e180882a52c9.jpg",
+      "price": 26,
+      "level": "basic",
+      "available": true
+    },
+    {
+      "id": 8399,
+      "name": "Spring desde cero",
+      "description": "Domina los conceptos y funcionalidades básicas del framework más usado en Java y desarrolla servicios web de manera rápida y eficaz.",
+      "poster": "https://edteam-media.s3.amazonaws.com/courses/big/6cbc514c-1e04-4bf4-8beb-fa595f363d9d.png",
+      "price": 12,
+      "level": "basic",
       "available": true
     }
   ]
